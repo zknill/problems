@@ -10,7 +10,7 @@ func IsPermutation(needle, haystack string) bool {
 
 	var permutation bool
 	for _, n := range needle {
-		if (chars[n] -1) >= 0 {
+		if (chars[n] - 1) >= 0 {
 			permutation = true
 		} else {
 			return false

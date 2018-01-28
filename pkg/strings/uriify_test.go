@@ -4,14 +4,14 @@ import "testing"
 
 func TestURLify(t *testing.T) {
 	tests := []struct {
-		name string
+		name  string
 		input string
-		want string
+		want  string
 	}{
 		{
-			name: "simple single replace",
+			name:  "simple single replace",
 			input: "hello world",
-			want: "hello%20world",
+			want:  "hello%20world",
 		},
 	}
 	for _, tt := range tests {
@@ -25,14 +25,14 @@ func TestURLify(t *testing.T) {
 
 func TestURLifyImproved(t *testing.T) {
 	tests := []struct {
-		name string
+		name  string
 		input string
-		want string
+		want  string
 	}{
 		{
-			name: "simple single replace",
+			name:  "simple single replace",
 			input: "hello world",
-			want: "hello%20world",
+			want:  "hello%20world",
 		},
 	}
 	for _, tt := range tests {
@@ -53,10 +53,10 @@ func BenchmarkURLify(b *testing.B) {
 func Benchmark(b *testing.B) {
 	benchmarks := []struct {
 		name string
-		f func(string)string
+		f    func(string) string
 	}{
-		{name:"URLify", f: URLify},
-		{name:"URLifyImproved", f: URLifyImproved},
+		{name: "URLify", f: URLify},
+		{name: "URLifyImproved", f: URLifyImproved},
 	}
 	for _, bm := range benchmarks {
 		b.Run(bm.name, func(b *testing.B) {

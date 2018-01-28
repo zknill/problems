@@ -4,9 +4,9 @@ import "testing"
 
 func TestUnique(t *testing.T) {
 	tests := []struct {
-		name string
+		name  string
 		input string
-		want bool
+		want  bool
 	}{
 		{name: "unique", input: "abcdefg", want: true},
 		{name: "duplicates", input: "abcdefgg", want: false},
@@ -22,9 +22,9 @@ func TestUnique(t *testing.T) {
 
 func TestUniqueNoMap(t *testing.T) {
 	tests := []struct {
-		name string
+		name  string
 		input string
-		want bool
+		want  bool
 	}{
 		{name: "unique", input: "abcdefg", want: true},
 		{name: "duplicates", input: "abcdefgg", want: false},

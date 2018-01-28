@@ -4,9 +4,9 @@ import "testing"
 
 func TestPalindromePermutation(t *testing.T) {
 	tests := []struct {
-		name string
+		name  string
 		input string
-		want bool
+		want  bool
 	}{
 		{name: "success", input: "tact coa", want: true},
 		{name: "failure", input: "tact coat", want: false},
@@ -22,9 +22,9 @@ func TestPalindromePermutation(t *testing.T) {
 
 func TestPalindromePermutationImproved(t *testing.T) {
 	tests := []struct {
-		name string
+		name  string
 		input string
-		want bool
+		want  bool
 	}{
 		{name: "success", input: "tact coa", want: true},
 		{name: "failure", input: "tact coat", want: false},
@@ -41,7 +41,7 @@ func TestPalindromePermutationImproved(t *testing.T) {
 func BenchmarkPalindromePermutation(b *testing.B) {
 	benchmarks := []struct {
 		name string
-		f func(string) bool
+		f    func(string) bool
 	}{
 		{name: "PalindromePermutation", f: PalindromePermutation},
 		{name: "PalindromePermutationImproved", f: PalindromePermutation},
@@ -54,4 +54,3 @@ func BenchmarkPalindromePermutation(b *testing.B) {
 		})
 	}
 }
-

@@ -25,19 +25,19 @@ func URLifyImproved(str string) string {
 	}
 
 	// make a new array with the extra space in it
-	output := make([]rune, len(str) + 3*spaces)
-	outIdx := len(output)-1
+	output := make([]rune, len(str)+3*spaces)
+	outIdx := len(output) - 1
 
 	// go backwards through the old array setting the last
 	// rune of str to the last position of output. When
 	// we get a space, put all 3 chars in there. We know
 	// there will always be space for the extras.
-	for i := len(str) -1; i >= 0; i--{
+	for i := len(str) - 1; i >= 0; i-- {
 		if str[i] == ' ' {
-			output[outIdx -3] = '%'
-			output[outIdx -2] = '2'
-			output[outIdx -1] = '0'
-			outIdx = outIdx -3
+			output[outIdx-3] = '%'
+			output[outIdx-2] = '2'
+			output[outIdx-1] = '0'
+			outIdx = outIdx - 3
 		} else {
 			output[outIdx-1] = rune(str[i])
 			outIdx--
