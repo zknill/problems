@@ -1,9 +1,8 @@
 package array
 
 import (
-	"fmt"
+	"bytes"
 	"math"
-	"strconv"
 )
 
 // IntMatrixN represents a NxN matrix storing ints
@@ -61,24 +60,11 @@ func (m *IntMatrixN) cell(x, y int) int {
 
 // String prints the matrix
 func (m *IntMatrixN) String() string {
-	f := " %0" + strconv.Itoa(m.valueWidth()) + "d "
-
-	var s string
-	for col := 0; col < m.height(); col++ {
-		s += "\n"
-		for row := 0; row < m.width(); row++ {
-			s += fmt.Sprintf(f, m.cell(row, col))
-		}
-		s += "\n"
-	}
-
-	return s
+	w := &bytes.Buffer{}
+	writeMatrix(w, m)
+	return w.String()
 }
 
 func (m *IntMatrixN) valueWidth() int {
-	var max float64
-	for _, v := range m.v {
-		max = math.Max(max, math.Log10(float64(v)))
-	}
-	return int(math.Ceil(max))
+	return valueWidth(m.v)
 }
