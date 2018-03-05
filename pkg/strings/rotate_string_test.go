@@ -69,6 +69,12 @@ func TestIsRotation(t *testing.T) {
 			rotated: "bottlewatef",
 			want: false,
 		},
+		{
+			name: "different letter",
+			original: "waterbottle",
+			rotated: "fbottlewate",
+			want: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

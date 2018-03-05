@@ -16,27 +16,25 @@ func IsRotation(original, rotated string) bool {
 		return false
 	}
 
-	idx, ri, ok := findFirstOverlap(original, rotated)
+	diff, ok := findFirstOverlap(original, rotated)
 	if !ok {
 		return false
 	}
 
-	diff := ri-idx
-	for x := idx; x < len(rotated) - diff; x++ {
+	for x := 0; x < len(rotated) - diff; x++ {
 		if original[x] != rotated[x+diff] {
 			return false
 		}
 	}
 
-	return strings.Contains(original, rotated[:ri])
+	return strings.Contains(original, rotated[:diff])
 }
 
-func findFirstOverlap(original, rotated string) (i, ri int, found bool) {
-	for i, c := range original {
-		for ri, rc := range rotated {
-			if c == rc {
-				return i, ri, true
-			}
+func findFirstOverlap(original, rotated string) (ri int, found bool) {
+	c := original[0]
+	for ri, rc := range rotated {
+		if rune(c) == rc {
+			return ri, true
 		}
 	}
 	return
