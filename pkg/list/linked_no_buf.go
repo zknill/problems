@@ -7,7 +7,7 @@ func (l *StrLinked) RemoveDupesNoBuf() {
 	l.head = removeDupesNoBuf(l.head, sn)
 }
 
-func removeDupesNoBuf(head node, sn hasNoder) node {
+func removeDupesNoBuf(head Node, sn hasNoder) Node {
 	n := head
 	_, ok := head.next()
 	prev := head
@@ -26,14 +26,14 @@ func removeDupesNoBuf(head node, sn hasNoder) node {
 }
 
 type hasNoder interface {
-	hasNode(n node) bool
+	hasNode(n Node) bool
 }
 
 type scanningNoder struct {
-	head node
+	head Node
 }
 
-func (s scanningNoder) hasNode(n node) bool {
+func (s scanningNoder) hasNode(n Node) bool {
 	_, ok := s.head.next()
 	curr := s.head
 
@@ -48,7 +48,7 @@ func (s scanningNoder) hasNode(n node) bool {
 	return false
 }
 
-func sameNode(n, needle node) bool {
+func sameNode(n, needle Node) bool {
 	if n == nil {
 		return false
 	}

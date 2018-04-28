@@ -7,7 +7,7 @@ import (
 // StrLinked is an implementation of a
 // linked list of strings.
 type StrLinked struct {
-	head node
+	head Node
 }
 
 // NewStrLinked is a constructor for
@@ -17,7 +17,7 @@ func NewStrLinked(strs ...string) *StrLinked {
 		return &StrLinked{}
 	}
 
-	var next node
+	var next Node
 	for i := len(strs); i > 0; i-- {
 		n := &strNode{
 			n: next,
@@ -41,7 +41,7 @@ func (l *StrLinked) RemoveDupes() {
 	l.head = remove(tmp.contains, l.head)
 }
 
-func remove(isDupe dupeFunc, n node) node {
+func remove(isDupe dupeFunc, n Node) Node {
 	if n == nil {
 		return nil
 	}
@@ -56,7 +56,7 @@ func remove(isDupe dupeFunc, n node) node {
 	return n
 }
 
-func nextNode(n node) node {
+func nextNode(n Node) Node {
 	nn, ok := n.next()
 	if !ok {
 		return nil
@@ -66,7 +66,7 @@ func nextNode(n node) node {
 
 type tmp map[string]struct{}
 
-func (t tmp) contains(n node) bool {
+func (t tmp) contains(n Node) bool {
 	if _, exists := t[n.value()]; exists {
 		return true
 	}
@@ -76,7 +76,7 @@ func (t tmp) contains(n node) bool {
 }
 
 
-type dupeFunc func (node node) bool
+type dupeFunc func (node Node) bool
 
 // String returns a prettified version
 // of the string linked list.
@@ -84,16 +84,16 @@ func (l *StrLinked) String() string {
 	return fmt.Sprintf("String Linked: %v", l.head)
 }
 
-type node interface {
-	setNext(node)
-	next() (node, bool)
+type Node interface {
+	setNext(Node)
+	next() (Node, bool)
 	value() string
 
 	fmt.Stringer
 }
 
 type strNode struct {
-	n node
+	n Node
 	v string
 }
 
@@ -101,11 +101,11 @@ func (s *strNode) String() string {
 	return fmt.Sprintf("{value: %q, next: %v}", s.v, s.n)
 }
 
-func (s *strNode) setNext(n node) {
+func (s *strNode) setNext(n Node) {
 	s.n = n
 }
 
-func (s *strNode) next() (node, bool) {
+func (s *strNode) next() (Node, bool) {
 	return s.n, s.n != nil
 }
 

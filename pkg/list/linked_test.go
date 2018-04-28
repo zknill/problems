@@ -31,7 +31,7 @@ func TestNewStrLinked(t *testing.T) {
 func TestStrLinked_RemoveDupes(t *testing.T) {
 	tests := []struct {
 		name string
-		head node
+		head Node
 		want *StrLinked
 	}{
 		{
@@ -73,7 +73,7 @@ func TestStrLinked_RemoveDupes(t *testing.T) {
 func TestStrLinked_RemoveDupesNoBuf(t *testing.T) {
 	tests := []struct {
 		name string
-		head node
+		head Node
 		want *StrLinked
 	}{
 		{
@@ -114,10 +114,10 @@ func TestStrLinked_RemoveDupesNoBuf(t *testing.T) {
 
 func Test_scanningNoder_hasNode(t *testing.T) {
 	tests := []struct {
-		name string
-		head  node
-		value node
-		want bool
+		name  string
+		head  Node
+		value Node
+		want  bool
 	}{
 		{name: "first", head: &strNode{v: "1", n:&strNode{v:"1"}}, value: &strNode{v:"1"}, want: true},
 		{name: "second", head: &strNode{v: "1", n: &strNode{v:"2", n: &strNode{v:"2"}}}, value: &strNode{v:"2"}, want: true},
