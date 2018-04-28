@@ -112,20 +112,20 @@ func TestStrLinked_RemoveDupesNoBuf(t *testing.T) {
 	}
 }
 
-func Test_containsStr(t *testing.T) {
+func Test_scanningNoder_hasNode(t *testing.T) {
 	tests := []struct {
 		name string
 		head  node
 		value node
 		want bool
 	}{
-		{name: "first", head: &strNode{v: "1"}, value: &strNode{v:"1", n:&strNode{v:"1"}}, want: true},
+		{name: "first", head: &strNode{v: "1", n:&strNode{v:"1"}}, value: &strNode{v:"1"}, want: true},
 		{name: "second", head: &strNode{v: "1", n: &strNode{v:"2", n: &strNode{v:"2"}}}, value: &strNode{v:"2"}, want: true},
 		{name: "missing", head: &strNode{v: "1", n: &strNode{v:"2"}}, value: &strNode{v:"3"}, want: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := containsStr(tt.head)(tt.value); got != tt.want {
+			if got := (&scanningNoder{head: tt.head}).hasNode(tt.value); got != tt.want {
 				t.Errorf("containsStr() = %v, want %v", got, tt.want)
 			}
 		})

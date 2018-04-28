@@ -3,17 +3,18 @@ package list
 import "reflect"
 
 func (l *StrLinked) RemoveDupesNoBuf() {
-	l.head = removeDupesNoBuf(l.head, containsStr(l.head))
+	sn := &scanningNoder{head: l.head}
+	l.head = removeDupesNoBuf(l.head, sn)
 }
 
-func removeDupesNoBuf(head node, c dupeFunc) node {
+func removeDupesNoBuf(head node, sn hasNoder) node {
 	n := head
 	_, ok := head.next()
 	prev := head
 
 	for ok {
 
-		if c(n) {
+		if sn.hasNode(n) {
 			prev.setNext(nextNode(n))
 		}
 
@@ -24,31 +25,40 @@ func removeDupesNoBuf(head node, c dupeFunc) node {
 	return head
 }
 
-// TODO (zak): Refactor this into something that doesn't look like spaghetti!
-func containsStr(head node) dupeFunc {
-	return func(needle node) bool {
-		var f func(n node, num uint) bool
+type hasNoder interface {
+	hasNode(n node) bool
+}
 
-		f = func(n node, num uint) bool {
-			if n == nil {
-				return false
-			}
+type scanningNoder struct {
+	head node
+}
 
-			sameNode := reflect.DeepEqual(n, needle)
-			matching := n.value() == needle.value()
+func (s scanningNoder) hasNode(n node) bool {
+	_, ok := s.head.next()
+	curr := s.head
 
-			if !sameNode && matching {
-				return true
-			}
-
-			n, ok := n.next()
-			if !ok {
-				return false
-			}
-
-			return f(n, num)
+	for ok {
+		if sameNode(curr, n) {
+			return true
 		}
 
-		return f(head, 0)
+		curr, ok = curr.next()
 	}
+
+	return false
+}
+
+func sameNode(n, needle node) bool {
+	if n == nil {
+		return false
+	}
+
+	sameNode := reflect.DeepEqual(n, needle)
+	matching := n.value() == needle.value()
+
+	if !sameNode && matching {
+		return true
+	}
+
+	return false
 }
